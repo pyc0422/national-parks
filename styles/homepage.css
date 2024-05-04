@@ -9,6 +9,7 @@ body {
     display: flex;
     align-items: center; /* Align content vertically center */
     justify-content: center; /* Align content horizontally center */
+    min-height: 100vh;
 }
 
 .custom-link {
@@ -27,10 +28,26 @@ body {
 .custom-link:focus{
     outline: 2px solid rgb(215, 235, 186);
 }
+
+/* ======= SEARCH PAGE ======== */
 table {
     background-color: rgb(225,225,225,0.7);
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse;
+    overflow-y: auto; 
 }
 td {
     border-bottom:1px solid black;
     padding:5px;
+}
+
+.search-container{
+    width: 80%; /* Adjust width as needed */
+    max-height: 90vh; /* Maximum height */
+    overflow: hidden; /* Enables scrolling */
+    padding: 20px; /* Spacing around the content */
+}
+
+#search-form{
+    max-width:max-content;
 }

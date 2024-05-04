@@ -1,6 +1,6 @@
 window.onload = () => {
     dynamicRenderOptions();
-    search();
+    formActions();
 }
 
 function dynamicRenderOptions() {
@@ -26,7 +26,7 @@ function loadData(arrayData) {
     });
 }
 
-function search() {
+function formActions() {
     const form = document.getElementById('search-form');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -36,8 +36,11 @@ function search() {
             const res = nationalParksArray.filter(park => park.State.toLowerCase() === optionVal);
             displayResults(res);
         }
+    })
+    form.addEventListener('reset', (e) => {
+        e.preventDefault();
        
-       
+        document.querySelector('table').style.display = 'none';
     })
 }
 
@@ -52,15 +55,15 @@ function displayResults(results) {
         const tr = document.createElement('tr');
         console.log(park)
         tr.innerHTML = `
-            <td>${park.LocationID}</td>
+            <td>${park.LocationID.toUpperCase()}</td>
             <td>${park.LocationName}</td>
-            <td>${park.Phone}</td>
-            <td>${park.Fax}</td>
+            <td>${park.Phone == '0' ? '/' : park.Phone}</td>
+            <td>${park.Fax == '0' ? '/' : park.Fax}</td>
             <td>${park.Address}</td>
             <td>${park.City}</td>
             <td>${park.State}</td>
             <td>${park.ZipCode}</td>
-            <td>${park.Visit ? `<a href=${park.Visit}>${park.Visit}</a>`:'None'}</td>
+            <td>${park.Visit ? `<a href=${park.Visit}>Visit WebSite</a>`:'/'}</td>
 
         `;
         tbody.appendChild(tr);

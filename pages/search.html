@@ -12,11 +12,10 @@
     <script src="../data/locationData.js"></script>
     <script src="../data/nationalParkData.js"></script>
     <script src="../functions/search.js"></script>
-
 </head>
 <body>
-   <div class="w-100 m-5 p-3 d-flex flex-column justify-content-center align-items-center gap-3">
-    <h1>Find a National Park to play</h1>
+   <div class="search-container m-5 p-3 gap-3 d-flex flex-column align-items-center">
+    <h1 class="text-center">Find a National Park to play</h1>
     <form id="search-form" class="d-flex flex-column justify-content-center align-items-center gap-3">
         <div class="d-flex gap-3" id="searchType">
             <div class="form-check">
@@ -31,9 +30,12 @@
         <select class="form-select" name="options" style="text-align: center;">
             <option value=""> --- Select One Choice ---</option>
         </select>
+        <div class="flex gap-3">
         <button type="submit" class="btn btn-primary">Search</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+    </div>
     </form>
-    <table class="p-4 overflow-auto rounded-5" style="display: none">
+    <table class="p-4 rounded-5" style="display: none">
         <thead>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
