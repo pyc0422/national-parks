@@ -1,6 +1,7 @@
 window.onload = () => {
     dynamicRenderOptions();
     formActions();
+    showAllParksClicked()
 }
 
 function dynamicRenderOptions() {
@@ -28,18 +29,17 @@ function loadData(arrayData) {
 
 function formActions() {
     const form = document.getElementById('search-form');
+    const optionVal = form.querySelector('select[name="options"]');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const searchType = document.querySelector('input[name="searchType"]:checked').value
-        const optionVal = form.querySelector('select[name="options"]').value.toLowerCase();
-        if (searchType === 'state') {
-            const res = nationalParksArray.filter(park => park.State.toLowerCase() === optionVal);
-            displayResults(res);
-        }
+        const res = getParkWithType(searchType, optionVal.value.toLowerCase())
+        displayResults(res);
     })
     form.addEventListener('reset', (e) => {
         e.preventDefault();
-       
+        optionVal.value = '';
+        document.querySelector('input[name="searchType"][value="state"]').checked = true;
         document.querySelector('table').style.display = 'none';
     })
 }
@@ -47,13 +47,10 @@ function formActions() {
 function displayResults(results) {
     const tbody = document.querySelector('tbody');
     tbody.innerHTML = '';
-    console.log('results', results)
     const table = document.querySelector('table');
-    console.log('table', table)
     if (results && results.length > 0) {table.style.display = 'block';}
     results.forEach(park => {
         const tr = document.createElement('tr');
-        console.log(park)
         tr.innerHTML = `
             <td>${park.LocationID.toUpperCase()}</td>
             <td>${park.LocationName}</td>
@@ -67,5 +64,21 @@ function displayResults(results) {
 
         `;
         tbody.appendChild(tr);
+    })
+}
+
+function getParkWithType(type, val) {
+    return nationalParksArray.filter(park => {
+        return type === 'state' ? 
+                park.State.toLowerCase() === val
+                : park.LocationName.toLowerCase().includes(val);
+    })
+}
+
+function showAllParksClicked() {
+    const btn = document.getElementById('showAllPark');
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        displayResults(nationalParksArray);
     })
 }
