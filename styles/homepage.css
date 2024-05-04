@@ -1,0 +1,36 @@
+/* Reset margin and padding for all elements */
+
+body {
+    /* Set the background image */
+    background-image: url('../images/Big-Bend-Texas2.webp'); /* Update 'background.jpg' to your image path */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Scale the background to cover the entire container */
+    display: flex;
+    align-items: center; /* Align content vertically center */
+    justify-content: center; /* Align content horizontally center */
+}
+
+.custom-link {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    color: white; /* White text */
+    padding: 10px 20px; /* Some padding */
+    text-decoration: none; /* No underline */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+    min-width: 20vw;
+    text-align: center;
+}
+.custom-link:hover, .custom-link:focus {
+    background-color: rgb(225, 225, 225, 0.8); /* White background on hover/focus */
+    color: black; /* Black text on hover/focus */
+}
+.custom-link:focus{
+    outline: 2px solid rgb(215, 235, 186);
+}
+table {
+    background-color: rgb(225,225,225,0.7);
+}
+td {
+    border-bottom:1px solid black;
+    padding:5px;
+}
