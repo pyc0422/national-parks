@@ -21,3 +21,12 @@ body {
 
     min-height: 100vh;
 }
+
+/* navbar items styles */
+.active {
+    font-weight: bold;
+}
+.nav-item:hover{
+    font-weight: semi-bold;
+    text-decoration: underline;
+}
