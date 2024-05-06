@@ -14,7 +14,6 @@ function dynamicRenderOptions() {
         const dataArr = searchValue === 'location' ? locationsArray : parkTypesArray;
         loadData(dataArr);
     })
-
 }
 function loadData(arrayData) {
     const parent = document.querySelector('select[name="options"]');
