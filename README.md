@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/pyc0422/national-parks/main/images/logo.svg" alt="logo" height=200>
 </div>
 
-### Tye it Live:     [Click Here](https://go-outside-seven.vercel.app/)
+### Tye it Live:     [Click Here](https://go-outdoors.vercel.app/)
 
 Welcome to the Go To Outdoors website, your ultimate online resource for exploring national parks and mountain information. Our site is designed to help outdoor enthusiasts plan their visits to various national parks and learn more about famous mountains.
 
