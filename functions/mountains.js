@@ -1,8 +1,29 @@
 window.onload = () => {
+    loadGoogleMapAPI();
     loadMountainData();
     const mountains = document.querySelector('select[name="mountains"]');
     mountains.addEventListener('change', dynamicRenderMountainDetail);
     reset();
+    
+}
+function loadGoogleMapAPI() {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&callback=fetchMap`;
+    script.defer = true;
+    script.async = true;
+    document.head.appendChild(script);
+}
+var map, marker;
+function fetchMap() {
+    const options = {
+        zoom:16,
+        center: {lat: 37.0902, lng: -95.7129}
+    }
+    map = new google.maps.Map(document.getElementById('map'), options);
+    marker = new google.maps.Marker ({
+        position: {lat: 37.0902, lng: -95.7129},
+        map: map
+    });
 }
 
 function loadMountainData() {
@@ -21,9 +42,18 @@ async function dynamicRenderMountainDetail(e) {
     const mountainName = e.target.value;
     const mountainInfo = mountainsArray.find(mountain => mountain.name === mountainName);
     if (!mountainInfo) return;
+    const detail = document.getElementById('detail');
+    detail.style.backgroundColor ='rgb(225,225,225,0.8)'
     detailContainer.style.display = 'flex';
-    const getFetchData = await fetchSunData(mountainInfo.coords.lat, mountainInfo.coords.lng);
+    const mapContainer = document.getElementById('map');
+    mapContainer.style.display = 'block';
+    const {lat, lng} = mountainInfo.coords;
+    const getFetchData = await fetchSunData(lat, lng);
     const { sunrise, sunset} = getFetchData.results;
+    console.log(sunrise, sunset)
+    fetchMap();
+    map.setCenter({lat, lng});
+    marker.setPosition({lat, lng});
     detailContainer.innerHTML = `
     <div class="d-flex flex-column flex-md-row gap-md-5 align-items-center m-md-2 p-md-2">
         <div class="d-flex flex-column algin-items-center">
@@ -36,12 +66,14 @@ async function dynamicRenderMountainDetail(e) {
             <div class="fw-semibold fs-5">Sunrise & Sunset time</div>
             <div>Today is <b>${new Date().toDateString()}</b></div>
             <div>
-            <span class="fw-semibold">Sunrise</span>:  ${sunrise}
-            <span class="fw-semibold ms-1">Sunset</span>:  ${sunset}</div>
+            <span class="fw-semibold">Sunrise</span>:  ${sunrise}   UTC
+            <span class="fw-semibold ms-1">Sunset</span>:  ${sunset}   UTC</div>
             </div>
         <div lass="fw-normal"><span class="fw-semibold fs-5">Description</span>: ${mountainInfo.desc}</div>
         </div>
-    </div>  
+       
+    </div>
+    
     `;
 }
 
